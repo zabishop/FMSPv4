@@ -3,6 +3,13 @@ require 'test_helper'
 class AccountsControllerTest < ActionController::TestCase
   setup do
     @account = accounts(:one)
+    @update = {
+        user_name: 'BobbySpringer01',
+        email: 'BobbySpringer@gmail.com',
+        pic_url: 'bobby.png' ,
+        date_of_birth: Time.now,
+        password: 'Winchester'
+    }
   end
 
   test "should get index" do
@@ -18,7 +25,7 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "should create account" do
     assert_difference('Account.count') do
-      post :create, account: { date_of_birth: @account.date_of_birth, email: @account.email, password: @account.password, pic_url: @account.pic_url, user_name: @account.user_name }
+      post :create, account: @update
     end
 
     assert_redirected_to account_path(assigns(:account))
@@ -35,7 +42,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should update account" do
-    put :update, id: @account, account: { date_of_birth: @account.date_of_birth, email: @account.email, password: @account.password, pic_url: @account.pic_url, user_name: @account.user_name }
+    put :update, id: @account, account: @update
     assert_redirected_to account_path(assigns(:account))
   end
 
